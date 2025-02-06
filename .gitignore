@@ -1,0 +1,6 @@
+.idea/
+*.java~
+*.class
+**/target/
+**-personal.properties
+*.properties~
