@@ -21,7 +21,7 @@ auth-cognito-m2m-client is a Java library that provides a simple and easy-to-use
 To use AuthCognitoClient in your project, add the following dependency to your `pom.xml` file (if using Maven):
 ```xml
 <dependency>
-    <groupId>com.safe.room.tech</groupId>
+    <groupId>com.safe.room.auth.cognito.m2m</groupId>
     <artifactId>auth-cognito-client</artifactId>
     <version>1.0.0</version>
 </dependency>

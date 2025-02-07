@@ -4,3 +4,4 @@
 **/target/
 **-personal.properties
 *.properties~
+*.md~
