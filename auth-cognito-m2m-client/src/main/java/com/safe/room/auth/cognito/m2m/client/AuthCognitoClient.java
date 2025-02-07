@@ -5,6 +5,8 @@ import com.safe.room.auth.cognito.m2m.client.dto.AuthClientConfig;
 import com.safe.room.auth.cognito.m2m.client.exceptions.GenerateAccessTokenException;
 import com.safe.room.auth.cognito.m2m.client.exceptions.AuthClientConfigException;
 import com.safe.room.auth.cognito.m2m.client.interfaces.AccessTokenManager;
+import com.safe.room.auth.cognito.m2m.common.logger.AuthCognitoLoggerProvider;
+import com.safe.room.auth.cognito.m2m.common.logger.LoggerFactory;
 
 /**
  * This class represents a client for interacting with AWS Cognito using the
@@ -25,6 +27,20 @@ public class AuthCognitoClient {
      * @throws AuthClientConfigException if the provided configuration is invalid
      */
     public AuthCognitoClient(AuthClientConfig authClientConfig) throws AuthClientConfigException {
+        accessTokenManager = AccessTokenManagerFactory.create(authClientConfig);
+    }
+
+    /**
+     * Constructs an instance of AuthCognitoClient using the provided AuthClientConfig
+     * and AuthCognitoLoggerProvider. Initializes the logger factory and creates
+     * an AccessTokenManager with the given configuration.
+     *
+     * @param authClientConfig the client configuration for authentication
+     * @param loggerProvider the logger provider to initialize the logger factory
+     * @throws AuthClientConfigException if the provided configuration is invalid
+     */
+    public AuthCognitoClient(AuthClientConfig authClientConfig, AuthCognitoLoggerProvider loggerProvider) throws AuthClientConfigException {
+        LoggerFactory.init(loggerProvider);
         accessTokenManager = AccessTokenManagerFactory.create(authClientConfig);
     }
 

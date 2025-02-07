@@ -16,6 +16,28 @@ auth-cognito-m2m-client is a Java library that provides a simple and easy-to-use
 * Java 8 or later
 * Maven or Gradle for building and dependency management
 
+### Building the Project
+
+To build the project, run the following command:
+
+```bash
+mvn clean package
+```
+
+This will build the project and create a JAR file in the `target` directory.
+
+### Building a Fat JAR
+
+To build a fat JAR that includes all dependencies, run the following command:
+
+```bash
+mvn clean package -Pshaded-uber -Dmaven.test.skip=true
+```
+
+This will create a fat JAR file in the `target` directory that includes all dependencies, making it easy to deploy and run the client.
+
+Note: The `-Pshaded-uber` flag tells Maven to use the `shaded-uber` profile, which is configured to build a fat JAR. The `-Dmaven.test.skip=true` flag tells Maven to skip running tests during the build process.
+
 ### Installation
 
 To use AuthCognitoClient in your project, add the following dependency to your `pom.xml` file (if using Maven):
