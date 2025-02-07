@@ -1,4 +1,4 @@
-package com.safe.room.tech.cognito.client.exceptions;
+package com.safe.room.auth.cognito.m2m.client.exceptions;
 
 public class AuthClientConfigException extends RuntimeException {
     public AuthClientConfigException(String message) {

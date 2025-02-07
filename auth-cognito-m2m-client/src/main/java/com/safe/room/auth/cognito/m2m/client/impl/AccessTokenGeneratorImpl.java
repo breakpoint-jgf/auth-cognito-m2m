@@ -1,12 +1,12 @@
-package com.safe.room.tech.cognito.client.impl;
+package com.safe.room.auth.cognito.m2m.client.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.safe.room.tech.cognito.client.interfaces.AccessTokenGenerator;
-import com.safe.room.tech.cognito.client.dto.AccessToken;
-import com.safe.room.tech.cognito.client.dto.AuthClientConfig;
-import com.safe.room.tech.cognito.client.exceptions.GenerateAccessTokenException;
-import com.safe.room.tech.cognito.client.interfaces.AuthClientConfigValidator;
+import com.safe.room.auth.cognito.m2m.client.interfaces.AccessTokenGenerator;
+import com.safe.room.auth.cognito.m2m.client.dto.AccessToken;
+import com.safe.room.auth.cognito.m2m.client.dto.AuthClientConfig;
+import com.safe.room.auth.cognito.m2m.client.exceptions.GenerateAccessTokenException;
+import com.safe.room.auth.cognito.m2m.client.interfaces.AuthClientConfigValidator;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

@@ -1,15 +1,10 @@
-package com.safe.room.tech.cognito.client;
+package com.safe.room.auth.cognito.m2m.client;
 
-import com.safe.room.tech.cognito.client.dto.AccessToken;
-import com.safe.room.tech.cognito.client.dto.AuthClientConfig;
-import com.safe.room.tech.cognito.client.exceptions.GenerateAccessTokenException;
-import com.safe.room.tech.cognito.client.exceptions.AuthClientConfigException;
-import com.safe.room.tech.cognito.client.impl.AccessTokenGeneratorImpl;
-import com.safe.room.tech.cognito.client.impl.AccessTokenManagerImpl;
-import com.safe.room.tech.cognito.client.impl.AuthClientConfigValidatorImpl;
-import com.safe.room.tech.cognito.client.interfaces.AccessTokenGenerator;
-import com.safe.room.tech.cognito.client.interfaces.AccessTokenManager;
-import com.safe.room.tech.cognito.client.interfaces.AuthClientConfigValidator;
+import com.safe.room.auth.cognito.m2m.client.dto.AccessToken;
+import com.safe.room.auth.cognito.m2m.client.dto.AuthClientConfig;
+import com.safe.room.auth.cognito.m2m.client.exceptions.GenerateAccessTokenException;
+import com.safe.room.auth.cognito.m2m.client.exceptions.AuthClientConfigException;
+import com.safe.room.auth.cognito.m2m.client.interfaces.AccessTokenManager;
 
 /**
  * This class represents a client for interacting with AWS Cognito using the

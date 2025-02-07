@@ -1,4 +1,4 @@
-package com.safe.room.tech.cognito.client.dto;
+package com.safe.room.auth.cognito.m2m.client.dto;
 
 import java.io.Serializable;
 

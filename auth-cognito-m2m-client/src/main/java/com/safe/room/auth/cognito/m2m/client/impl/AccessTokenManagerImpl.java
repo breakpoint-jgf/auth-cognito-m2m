@@ -1,10 +1,10 @@
-package com.safe.room.tech.cognito.client.impl;
+package com.safe.room.auth.cognito.m2m.client.impl;
 
-import com.safe.room.tech.cognito.client.interfaces.AccessTokenGenerator;
-import com.safe.room.tech.cognito.client.interfaces.AccessTokenManager;
-import com.safe.room.tech.cognito.client.dto.AccessToken;
-import com.safe.room.tech.cognito.client.exceptions.GenerateAccessTokenException;
-import com.safe.room.tech.cognito.client.exceptions.AuthClientConfigException;
+import com.safe.room.auth.cognito.m2m.client.interfaces.AccessTokenGenerator;
+import com.safe.room.auth.cognito.m2m.client.interfaces.AccessTokenManager;
+import com.safe.room.auth.cognito.m2m.client.dto.AccessToken;
+import com.safe.room.auth.cognito.m2m.client.exceptions.GenerateAccessTokenException;
+import com.safe.room.auth.cognito.m2m.client.exceptions.AuthClientConfigException;
 
 import java.time.Instant;
 import java.util.Optional;

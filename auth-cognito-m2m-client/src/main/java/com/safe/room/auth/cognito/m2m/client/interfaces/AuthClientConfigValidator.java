@@ -1,7 +1,7 @@
-package com.safe.room.tech.cognito.client.interfaces;
+package com.safe.room.auth.cognito.m2m.client.interfaces;
 
-import com.safe.room.tech.cognito.client.dto.AuthClientConfig;
-import com.safe.room.tech.cognito.client.exceptions.AuthClientConfigException;
+import com.safe.room.auth.cognito.m2m.client.dto.AuthClientConfig;
+import com.safe.room.auth.cognito.m2m.client.exceptions.AuthClientConfigException;
 
 /**
  * This interface defines a contract for validating the configuration

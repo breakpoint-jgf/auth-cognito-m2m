@@ -1,8 +1,8 @@
-package com.safe.room.tech.cognito.client.test;
+package com.safe.room.auth.cognito.m2m.client.test;
 
-import com.safe.room.tech.cognito.client.AuthCognitoClient;
-import com.safe.room.tech.cognito.client.dto.AccessToken;
-import com.safe.room.tech.cognito.client.dto.AuthClientConfig;
+import com.safe.room.auth.cognito.m2m.client.AuthCognitoClient;
+import com.safe.room.auth.cognito.m2m.client.dto.AccessToken;
+import com.safe.room.auth.cognito.m2m.client.dto.AuthClientConfig;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

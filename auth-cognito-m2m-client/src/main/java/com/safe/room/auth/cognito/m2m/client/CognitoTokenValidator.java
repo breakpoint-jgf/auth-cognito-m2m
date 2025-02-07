@@ -1,4 +1,4 @@
-package com.safe.room.tech.cognito.client;
+package com.safe.room.auth.cognito.m2m.client;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

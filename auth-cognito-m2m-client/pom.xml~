@@ -6,7 +6,7 @@
 
 	<parent>
 		<groupId>com.safe.room.auth.cognito.m2m</groupId>
-		<artifactId>auth-cognito-m2m</artifactId>
+		<artifactId>auth-cognito-m2m-client</artifactId>
 		<version>1.0</version>
 	</parent>
    

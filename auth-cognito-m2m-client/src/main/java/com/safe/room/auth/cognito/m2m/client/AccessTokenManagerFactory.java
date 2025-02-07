@@ -1,12 +1,12 @@
-package com.safe.room.tech.cognito.client;
+package com.safe.room.auth.cognito.m2m.client;
 
-import com.safe.room.tech.cognito.client.dto.AuthClientConfig;
-import com.safe.room.tech.cognito.client.impl.AccessTokenGeneratorImpl;
-import com.safe.room.tech.cognito.client.impl.AccessTokenManagerImpl;
-import com.safe.room.tech.cognito.client.impl.AuthClientConfigValidatorImpl;
-import com.safe.room.tech.cognito.client.interfaces.AccessTokenGenerator;
-import com.safe.room.tech.cognito.client.interfaces.AccessTokenManager;
-import com.safe.room.tech.cognito.client.interfaces.AuthClientConfigValidator;
+import com.safe.room.auth.cognito.m2m.client.dto.AuthClientConfig;
+import com.safe.room.auth.cognito.m2m.client.impl.AccessTokenGeneratorImpl;
+import com.safe.room.auth.cognito.m2m.client.impl.AccessTokenManagerImpl;
+import com.safe.room.auth.cognito.m2m.client.impl.AuthClientConfigValidatorImpl;
+import com.safe.room.auth.cognito.m2m.client.interfaces.AccessTokenGenerator;
+import com.safe.room.auth.cognito.m2m.client.interfaces.AccessTokenManager;
+import com.safe.room.auth.cognito.m2m.client.interfaces.AuthClientConfigValidator;
 /**
  * A factory class for creating AccessTokenManager instances based on the
  * provided AuthClientConfig.

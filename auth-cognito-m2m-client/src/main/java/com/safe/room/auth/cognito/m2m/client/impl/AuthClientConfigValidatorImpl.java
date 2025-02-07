@@ -1,8 +1,8 @@
-package com.safe.room.tech.cognito.client.impl;
+package com.safe.room.auth.cognito.m2m.client.impl;
 
-import com.safe.room.tech.cognito.client.interfaces.AuthClientConfigValidator;
-import com.safe.room.tech.cognito.client.dto.AuthClientConfig;
-import com.safe.room.tech.cognito.client.exceptions.AuthClientConfigException;
+import com.safe.room.auth.cognito.m2m.client.interfaces.AuthClientConfigValidator;
+import com.safe.room.auth.cognito.m2m.client.dto.AuthClientConfig;
+import com.safe.room.auth.cognito.m2m.client.exceptions.AuthClientConfigException;
 
 import java.util.HashSet;
 import java.util.Set;
