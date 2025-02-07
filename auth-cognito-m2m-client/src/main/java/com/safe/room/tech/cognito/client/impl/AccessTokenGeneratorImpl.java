@@ -6,6 +6,7 @@ import com.safe.room.tech.cognito.client.interfaces.AccessTokenGenerator;
 import com.safe.room.tech.cognito.client.dto.AccessToken;
 import com.safe.room.tech.cognito.client.dto.AuthClientConfig;
 import com.safe.room.tech.cognito.client.exceptions.GenerateAccessTokenException;
+import com.safe.room.tech.cognito.client.interfaces.AuthClientConfigValidator;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -22,7 +23,8 @@ public class AccessTokenGeneratorImpl implements AccessTokenGenerator {
     private final OkHttpClient client;
     private final ObjectMapper objectMapper;
 
-    public AccessTokenGeneratorImpl(AuthClientConfig authClientConfig) {
+    public AccessTokenGeneratorImpl(AuthClientConfigValidator authClientConfigValidator, AuthClientConfig authClientConfig) {
+        authClientConfigValidator.validateConfig(authClientConfig);
         this.authClientConfig = authClientConfig;
         this.client = new OkHttpClient();
         this.objectMapper = new ObjectMapper();

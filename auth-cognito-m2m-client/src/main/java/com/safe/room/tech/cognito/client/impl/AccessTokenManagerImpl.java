@@ -7,6 +7,7 @@ import com.safe.room.tech.cognito.client.exceptions.GenerateAccessTokenException
 import com.safe.room.tech.cognito.client.exceptions.AuthClientConfigException;
 
 import java.time.Instant;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -22,29 +23,38 @@ public class AccessTokenManagerImpl implements AccessTokenManager {
         this.accessTokenRef = new AtomicReference<>();
     }
 
+
     public AccessToken getAccessToken() throws GenerateAccessTokenException {
 
-        AccessToken accessToken = accessTokenRef.get();
+        // This code attempts to return an AccessToken instance that is
+        // currently valid. If the current access token is not available or
+        // has expired, it will generate a new one using the provided
+        // AccessTokenGenerator. The new access token is published to the
+        // other threads only if the current access token has changed. This
+        // ensures that all threads will eventually see the new access token
+        // and use it to authenticate with AWS Cognito.
 
-        if (accessTokenRef.get() == null){
-            accessTokenRef.set(accessTokenGenerator.generateAccessToken());
-            return accessTokenRef.get();
-        }
+        Optional<AccessToken> currentToken = Optional.ofNullable(accessTokenRef.get());
 
-        if (isTokenExpired(accessTokenRef.get())) {
+        if (!currentToken.isPresent() || isTokenExpired(currentToken.get())) {
             AccessToken newAccessToken = accessTokenGenerator.generateAccessToken();
-            if (accessTokenRef.compareAndSet(accessTokenRef.get(), newAccessToken)) {
-                return newAccessToken;
+            while (!accessTokenRef.compareAndSet(currentToken.orElse(null), newAccessToken)) {
+                currentToken = Optional.ofNullable(accessTokenRef.get());
+                if (currentToken.isPresent() && !isTokenExpired(currentToken.get())) {
+                    return currentToken.get();
+                }
             }
-            // another thread generated the token, return the latest one
-            return accessTokenRef.get();
         }
 
-        // token is valid, no need to update
         return accessTokenRef.get();
     }
 
     private boolean isTokenExpired(AccessToken accessToken) {
+        // Checks if the access token has expired by comparing the current
+        // time against the expiration time. The token is considered expired
+        // if the current time is greater than the expiration time minus a
+        // threshold of 5 minutes. This ensures that the access token is
+        // refreshed before it actually expires.
         long expirationTime = accessToken.getExpirationTime();
         long currentTime = Instant.now().toEpochMilli();
         return currentTime + TOKEN_REFRESH_THRESHOLD > expirationTime;

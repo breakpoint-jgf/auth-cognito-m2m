@@ -2,6 +2,11 @@ package com.safe.room.tech.cognito.client.dto;
 
 import java.util.Collection;
 
+/**
+ * This class represents the configuration required for authenticating with an OAuth2.0
+ * client using AWS Cognito. It contains the client ID, client secret, scopes, and the
+ * token endpoint URL needed to obtain an access token.
+ */
 public class AuthClientConfig {
 
     private final String clientId;
