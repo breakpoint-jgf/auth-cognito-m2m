@@ -21,7 +21,7 @@ public class AuthCognitoClientTest {
     @BeforeAll
     public static void setUp() throws IOException {
         props = new Properties();
-        try (InputStream input = AuthCognitoClientTest.class.getResourceAsStream("/test-personal.properties")) {
+        try (InputStream input = AuthCognitoClientTest.class.getResourceAsStream("/test.properties")) {
             props.load(input);
         }
     }
