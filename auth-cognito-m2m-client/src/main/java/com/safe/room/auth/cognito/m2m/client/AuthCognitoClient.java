@@ -6,7 +6,7 @@ import com.safe.room.auth.cognito.m2m.client.exceptions.GenerateAccessTokenExcep
 import com.safe.room.auth.cognito.m2m.client.exceptions.AuthClientConfigException;
 import com.safe.room.auth.cognito.m2m.client.interfaces.AccessTokenManager;
 import com.safe.room.auth.cognito.m2m.common.logger.AuthCognitoLoggerProvider;
-import com.safe.room.auth.cognito.m2m.common.logger.LoggerFactory;
+import com.safe.room.auth.cognito.m2m.common.logger.AuthCognitoLoggerFactory;
 
 /**
  * This class represents a client for interacting with AWS Cognito using the
@@ -40,7 +40,7 @@ public class AuthCognitoClient {
      * @throws AuthClientConfigException if the provided configuration is invalid
      */
     public AuthCognitoClient(AuthClientConfig authClientConfig, AuthCognitoLoggerProvider loggerProvider) throws AuthClientConfigException {
-        LoggerFactory.init(loggerProvider);
+        AuthCognitoLoggerFactoryWrapper.register(loggerProvider);
         accessTokenManager = AccessTokenManagerFactory.create(authClientConfig);
     }
 
@@ -64,6 +64,15 @@ public class AuthCognitoClient {
      */
     public String getAccessTokenString() throws GenerateAccessTokenException {
         return getAccessToken().getToken();
+    }
+
+    private static class AuthCognitoLoggerFactoryWrapper extends AuthCognitoLoggerFactory {
+        private AuthCognitoLoggerFactoryWrapper(AuthCognitoLoggerProvider loggerProvider) {
+            super(loggerProvider);
+        }
+        static void register(AuthCognitoLoggerProvider loggerProvider) {
+            init(loggerProvider);
+        }
     }
 
 }

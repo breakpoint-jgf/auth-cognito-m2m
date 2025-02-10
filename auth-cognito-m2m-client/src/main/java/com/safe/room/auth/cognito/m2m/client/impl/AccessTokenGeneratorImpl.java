@@ -7,6 +7,8 @@ import com.safe.room.auth.cognito.m2m.client.dto.AccessToken;
 import com.safe.room.auth.cognito.m2m.client.dto.AuthClientConfig;
 import com.safe.room.auth.cognito.m2m.client.exceptions.GenerateAccessTokenException;
 import com.safe.room.auth.cognito.m2m.client.interfaces.AuthClientConfigValidator;
+import com.safe.room.auth.cognito.m2m.common.logger.AuthCognitoLogger;
+import com.safe.room.auth.cognito.m2m.common.logger.AuthCognitoLoggerFactory;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -15,9 +17,12 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class AccessTokenGeneratorImpl implements AccessTokenGenerator {
+
+    private static final AuthCognitoLogger LOGGER = AuthCognitoLoggerFactory.getLogger(AccessTokenGeneratorImpl.class);
 
     private final AuthClientConfig authClientConfig;
     private final OkHttpClient client;
@@ -36,12 +41,9 @@ public class AccessTokenGeneratorImpl implements AccessTokenGenerator {
 
             final long startTime = System.currentTimeMillis();
             Request request = createRequest();
+            LOGGER.info("Requesting token from : " + this.authClientConfig.getTokenEndpoint());
             Response response = this.client.newCall(request).execute();
-
-            if (!response.isSuccessful()) {
-                throw new IOException("Request failed with status code = " + response.code() + ", body = " + response.body().string());
-            }
-
+            inspectResponse(response);
             JsonNode jsonResponse = this.objectMapper.readTree(response.body().string());
 
             // Store the access token and expiration time
@@ -55,10 +57,21 @@ public class AccessTokenGeneratorImpl implements AccessTokenGenerator {
                     .setExpirationTime(expirationTime)
                     .build();
 
+        } catch (GenerateAccessTokenException e){
+            throw e;
         } catch (Exception e){
             throw new GenerateAccessTokenException("Error generating access token: " + e.getMessage(), e);
         }
 
+    }
+
+    private void inspectResponse(Response response) throws GenerateAccessTokenException, IOException {
+        if (!response.isSuccessful()) {
+            String errorMsg = String.format("Request failed with status code = %s, body = %s",
+                    response.code(), Objects.nonNull(response.body()) ? response.body().string() : null);
+            LOGGER.error(errorMsg);
+            throw new GenerateAccessTokenException(errorMsg);
+        }
     }
 
     private String resolveScope(Collection<String> scopes) {

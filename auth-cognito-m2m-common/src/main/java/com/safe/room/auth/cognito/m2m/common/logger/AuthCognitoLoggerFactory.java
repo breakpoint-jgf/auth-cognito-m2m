@@ -2,19 +2,19 @@ package com.safe.room.auth.cognito.m2m.common.logger;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-public class LoggerFactory {
+public class AuthCognitoLoggerFactory {
 
-    private static final AtomicReference<LoggerFactory> instanceRef = new AtomicReference<>();
+    private static final AtomicReference<AuthCognitoLoggerFactory> instanceRef = new AtomicReference<>();
     private AuthCognitoLoggerProvider loggerProvider;
 
-    private LoggerFactory(AuthCognitoLoggerProvider loggerProvider) {
+    protected AuthCognitoLoggerFactory(AuthCognitoLoggerProvider loggerProvider) {
         this.loggerProvider = loggerProvider;
     }
 
-    private static LoggerFactory getInstance() {
-        LoggerFactory instance = instanceRef.get();
+    private static AuthCognitoLoggerFactory getInstance() {
+        AuthCognitoLoggerFactory instance = instanceRef.get();
         if (instance == null) {
-            instance = new LoggerFactory(defaultLoggerProvider());
+            instance = new AuthCognitoLoggerFactory(defaultLoggerProvider());
             if (!instanceRef.compareAndSet(null, instance)) {
                 instance = instanceRef.get();
             }
@@ -30,9 +30,9 @@ public class LoggerFactory {
         return getInstance().loggerProvider.getLogger(clazz);
     }
 
-    public static void init(AuthCognitoLoggerProvider loggerProvider) {
+    protected static void init(AuthCognitoLoggerProvider loggerProvider) {
         if (loggerProvider == null) return;
-        LoggerFactory.instanceRef.compareAndSet(LoggerFactory.instanceRef.get(), new LoggerFactory(loggerProvider));
+        AuthCognitoLoggerFactory.instanceRef.compareAndSet(AuthCognitoLoggerFactory.instanceRef.get(), new AuthCognitoLoggerFactory(loggerProvider));
     }
 
 }

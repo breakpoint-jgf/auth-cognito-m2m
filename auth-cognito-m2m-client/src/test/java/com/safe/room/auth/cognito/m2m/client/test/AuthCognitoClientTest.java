@@ -3,6 +3,7 @@ package com.safe.room.auth.cognito.m2m.client.test;
 import com.safe.room.auth.cognito.m2m.client.AuthCognitoClient;
 import com.safe.room.auth.cognito.m2m.client.dto.AccessToken;
 import com.safe.room.auth.cognito.m2m.client.dto.AuthClientConfig;
+import com.safe.room.auth.cognito.m2m.common.logger.DefaultLogger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ public class AuthCognitoClientTest {
     @BeforeAll
     public static void setUp() throws IOException {
         props = new Properties();
-        try (InputStream input = AuthCognitoClientTest.class.getResourceAsStream("/test.properties")) {
+        try (InputStream input = AuthCognitoClientTest.class.getResourceAsStream("/test-personal.properties")) {
             props.load(input);
         }
     }
@@ -40,7 +41,7 @@ public class AuthCognitoClientTest {
                 .setTokenEndpoint(tokenEndpoint)
                 .build();
 
-        AuthCognitoClient client = new AuthCognitoClient(clientConfig);
+        AuthCognitoClient client = new AuthCognitoClient(clientConfig, c -> new DefaultLogger());
         AccessToken accessToken = client.getAccessToken();
         assertNotNull(accessToken);
         System.out.println(accessToken.getToken());

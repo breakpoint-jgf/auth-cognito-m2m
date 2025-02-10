@@ -18,17 +18,8 @@ public class DefaultLogger implements AuthCognitoLogger {
     }
 
     @Override
-    public void info(String message, Object... args) {
-        System.out.println("INFO: " + String.format(message, args));
-    }
-
-    @Override
-    public void warn(String message, Object... args) {
-        System.out.println("WARN: " + String.format(message, args));
-    }
-
-    @Override
-    public void error(String message, Object... args) {
-        System.out.println("ERROR: " + String.format(message, args));
+    public void error(String message, Throwable t) {
+        System.err.println("ERROR: " + message + ", STACKTRACE: ");
+        t.printStackTrace(System.err);
     }
 }
