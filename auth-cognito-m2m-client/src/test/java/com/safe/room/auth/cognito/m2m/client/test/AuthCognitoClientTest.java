@@ -27,7 +27,7 @@ public class AuthCognitoClientTest {
     }
 
     @Test
-    public void testAuthCognitoClient() throws Exception {
+    void testAuthCognitoClient() throws Exception {
 
         String clientId = props.getProperty("client.id");
         String clientSecret = props.getProperty("client.secret");

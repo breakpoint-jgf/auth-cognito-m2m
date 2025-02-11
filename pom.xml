@@ -23,7 +23,8 @@
 	<modules>
 		<module>auth-cognito-m2m-common</module>
 		<module>auth-cognito-m2m-client</module>
-	</modules>
+        <module>auth-cognito-m2m-validator</module>
+    </modules>
 
 	<dependencyManagement>
 		<dependencies>
